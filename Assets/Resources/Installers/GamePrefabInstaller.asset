@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d38e29d1ee480a847bb7fc517e45ec, type: 3}
+  m_Name: GamePrefabInstaller
+  m_EditorClassIdentifier: 
+  playerControlsDatabase: {fileID: 11400000, guid: 10f822ba7705caa4bb93464a27e1f42b, type: 2}
+  playerAimDatabase: {fileID: 11400000, guid: 2c892524da68aec499cbe1627c8d0d46, type: 2}
+  towerSettingsDatabase: {fileID: 11400000, guid: 1971dff077f690147a7a3426c76bc59e, type: 2}
+  layerSettingsDatabase: {fileID: 11400000, guid: 459e642e6fa671742a2c37b7cc3a039a, type: 2}
+  arrowSettingsDatabase: {fileID: 11400000, guid: 853b0ad7f8bfa5645a3b9261f3d6c26f, type: 2}
+  enemySettingsDatabase: {fileID: 11400000, guid: dbe6e52f168966942a1fd987e88b5bef, type: 2}
+  enemyBehaviorDatabase: {fileID: 11400000, guid: e855880f37faeda4fbf58daf478c7d9a, type: 2}
+  enemySpawnDatabase: {fileID: 11400000, guid: a29180619c8432942a80a20afb9280c2, type: 2}
+  canvasPrefab: {fileID: 4696988998750788614, guid: 836f152f3a4479f43a7a65d66ea85249, type: 3}
+  buyBlockPrefab: {fileID: 996794955597661250, guid: 9fa2ab85583a9164f8eeb359d7d86ff8, type: 3}
