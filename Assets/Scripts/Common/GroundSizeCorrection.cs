@@ -31,7 +31,7 @@ namespace Common
 
             pos.y += groundTransform.localScale.y/2;
 
-            towerTransform.position = pos;
+            //towerTransform.position = pos;
         }
     }
 }

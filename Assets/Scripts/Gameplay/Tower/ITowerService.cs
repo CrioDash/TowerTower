@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Gameplay.Tower
 {
@@ -7,6 +8,9 @@ namespace Gameplay.Tower
     {
         IReadOnlyList<ITowerBlock> Blocks { get; }
         IObservable<ITowerBlock> OnBlockAdded { get; }
+        Transform BlocksParent { get; }
+        int CurrentBlocks { get; }
+        void AddChunk();
         void AddBlock();
     }
 }

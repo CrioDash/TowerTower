@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8353ff715248c3ae482a3f97cbbdd6, type: 3}
   m_Name: TowerSettingsDatabase
   m_EditorClassIdentifier: 
-  initialBlockAmount: 2
-  blockSize: {x: 2, y: 2, z: 1}
+  initialBlockAmount: 0
+  blockSize: {x: 6, y: 6, z: 1}
+  towerBlockPrefab: {fileID: 3457894756462549500, guid: ee4bec4a2843fdf4fb028325c3721fa4, type: 3}
+  towerChunkPrefab: {fileID: 3457894756462549500, guid: e37cdb59f5fbd2344a4f3cf52fa4bbe0, type: 3}
+  towerSprites:
+  - {fileID: 1393780040, guid: 8f0a291acf9fdd94bad6a8f52f6a790e, type: 3}
+  - {fileID: 1946206889, guid: 8f0a291acf9fdd94bad6a8f52f6a790e, type: 3}
+  - {fileID: 6304826840174917774, guid: 8f0a291acf9fdd94bad6a8f52f6a790e, type: 3}

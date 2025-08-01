@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2751481187815588310}
   - component: {fileID: 8701031518218776180}
   m_Layer: 6
-  m_Name: TowerBlock
+  m_Name: TowerChunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6304826840174917774, guid: 8f0a291acf9fdd94bad6a8f52f6a790e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: faae7d4ac59d03841b614f7a9bb5cca2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 0.33}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -167,11 +167,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.81, y: 0.27}
-    newSize: {x: 1, y: 0.33}
+    oldSize: {x: 0.81, y: 0.81}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.33}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

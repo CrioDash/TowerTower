@@ -56,8 +56,6 @@ namespace Gameplay.Drag.Impls
 
         private void Start()
         {
-            _sideService.OnSideChanged.Subscribe(OnSideChanged).AddTo(this);
-
             _visualizer.ResetSpline();
         }
 
@@ -97,11 +95,6 @@ namespace Gameplay.Drag.Impls
             var force = -spriteContainer.right * (_playerAimDatabase.ArrowMaxForce * _currentPull);;
             
             _arrowFactory.Create(pos, angle, force);
-        }
-        
-        private void OnSideChanged(EPlayerSide side)
-        {
-            spriteContainer.localRotation = side == EPlayerSide.Right ? Quaternion.Euler(0, 180f, 0) : Quaternion.identity;
         }
         
     }

@@ -41,9 +41,9 @@ namespace Gameplay.Arrow
             _collider = GetComponent<Collider2D>();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
-            if (_rigidbody.bodyType == RigidbodyType2D.Static || _rigidbody.linearVelocity.magnitude < 0.01f) return;
+            if (_rigidbody.bodyType == RigidbodyType2D.Static || _rigidbody.linearVelocity.magnitude <= 0.01f) return;
             
             Vector2 v = _rigidbody.linearVelocity.normalized;
             
@@ -69,8 +69,7 @@ namespace Gameplay.Arrow
 
             angle.z += 90f;
             transform.eulerAngles = angle;
-            _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            _rigidbody.constraints = RigidbodyConstraints2D.None;
+            _rigidbody.simulated = true;
             _rigidbody.AddForce(force, ForceMode2D.Impulse);
             
             _collider.enabled = true;
@@ -92,14 +91,18 @@ namespace Gameplay.Arrow
         
         public void StickInto(Transform parent)
         {
-            _rigidbody.linearVelocity = Vector2.zero;
-            _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+            Vector3 worldPos   = transform.position;
+            Quaternion worldRot = transform.rotation;
             
+            transform.SetParent(parent, false);
             
-            _collider.enabled = false;
+            transform.position = worldPos;
+            transform.rotation = worldRot;
             
-            transform.SetParent(parent, true);
+            _rigidbody.simulated = false;
+            _rigidbody.linearVelocity  = Vector2.zero;
+            _rigidbody.angularVelocity = 0f;
+            _collider.enabled    = false;
         }
         
         public class ArrowPool : MonoMemoryPool<Vector3, Vector3, Vector3, Arrow>

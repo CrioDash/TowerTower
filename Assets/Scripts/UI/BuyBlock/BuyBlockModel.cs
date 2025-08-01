@@ -8,7 +8,7 @@ namespace UI.BuyBlock
 {
     public class BuyBlockModel : IUIModel
     {
-        private readonly BehaviorSubject<int> _onBlockBuy = new BehaviorSubject<int>(1);
+        private readonly BehaviorSubject<int> _onBlockBuy = new BehaviorSubject<int>(0);
 
         private int _blockCount;
         

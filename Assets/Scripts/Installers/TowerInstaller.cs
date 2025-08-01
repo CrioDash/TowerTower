@@ -6,14 +6,14 @@ namespace Installers
 {
     public class TowerInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject blockPrefab;
         [SerializeField] private Transform blocksParent;
+        [SerializeField] private Transform[] _towerBlocks; 
         
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<TowerService>()
                 .AsSingle()
-                .WithArguments(blockPrefab, blocksParent);
+                .WithArguments(blocksParent, _towerBlocks);
         }
         
     }

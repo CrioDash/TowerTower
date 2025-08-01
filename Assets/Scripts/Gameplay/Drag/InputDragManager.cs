@@ -28,7 +28,7 @@ namespace Gameplay.Drag
             Vector3 screenPos;
             Vector3 worldPos;
             
-            if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(0))
+            if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
                 screenPos = Input.touches[0].position;
                 worldPos = _cam.ScreenToWorldPoint(screenPos);
@@ -77,7 +77,7 @@ namespace Gameplay.Drag
                 return;
             }
             
-            if(Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject(0))
+            if(Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject())
                 return;
 
             screenPos = Input.mousePosition;

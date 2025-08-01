@@ -28,7 +28,6 @@ namespace Gameplay.Aim.Impls
         {
             Vector2 direction = side == EPlayerSide.Left ? current - dragStart : dragStart - current;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            angle = Mathf.Clamp(angle, -80f, 80f);
 
             return side == EPlayerSide.Right ? -angle : angle;
         }

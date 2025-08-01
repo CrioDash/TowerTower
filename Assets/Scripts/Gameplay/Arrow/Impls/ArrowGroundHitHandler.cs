@@ -24,7 +24,13 @@ namespace Gameplay.Arrow.Impls
             if ((_layerSettingsDatabase.GroundLayer.value & (1 << collision.gameObject.layer)) == 0)
                 return false;
 
-            arrow.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            var rigidbody = arrow.GetComponent<Rigidbody2D>();
+            var collider = arrow.GetComponent<Collider2D>();
+
+            rigidbody.simulated = false;
+            rigidbody.linearVelocity  = Vector2.zero;
+            rigidbody.angularVelocity = 0f;
+            collider.enabled = false;
 
             return true;
         }
