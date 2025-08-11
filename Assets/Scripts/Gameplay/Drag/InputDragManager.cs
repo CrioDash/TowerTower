@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
 using Gameplay.Drag.Impls;
 using Gameplay.Player;
@@ -17,41 +18,63 @@ namespace Gameplay.Drag
         private Camera _cam;
 
         private IDraggable _draggable;
-
+        private Touch _touch;
+        private Collider2D[] _overlap = new Collider2D[1];
+        private PointerEventData _ped;
+        private readonly List<RaycastResult> _uiHits = new(1);
+        private ContactFilter2D _filter;
+        
+        private bool _startedOverUITouch;
+        private bool _startedOverUIMouse;
+        
+        private Vector3 _worldPos;
+        
         private void Awake()
         {
             _cam = Camera.main;
+            _filter = new ContactFilter2D { useLayerMask = true, layerMask = dragMask, useTriggers = true };
+        }
+        
+        private bool IsPointerOverUI(Vector2 screenPos)
+        {
+            if (EventSystem.current == null) return false;
+            _ped ??= new PointerEventData(EventSystem.current);
+            _ped.Reset();
+            _ped.position = screenPos;
+            _uiHits.Clear();
+            EventSystem.current.RaycastAll(_ped, _uiHits);
+            return _uiHits.Count > 0;
         }
 
         private void Update()
         {
-            Vector3 screenPos;
-            Vector3 worldPos;
-            
-            if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            if (Input.touchCount > 0)
             {
-                screenPos = Input.touches[0].position;
-                worldPos = _cam.ScreenToWorldPoint(screenPos);
+                _touch = Input.GetTouch(0);
+                _worldPos = _cam.ScreenToWorldPoint(_touch.position);
+                
+                if (_touch.phase == TouchPhase.Began)
+                    _startedOverUITouch = IsPointerOverUI(_touch.position);
 
-                var touch = Input.touches[0];
+                if (_startedOverUITouch)
+                    return;
 
-                switch (touch.phase)
+
+                switch (_touch.phase)
                 {
                     case TouchPhase.Began:
                     {
-                        var hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, dragMask);
-                        if (hit.collider && hit.collider.TryGetComponent(out _draggable))
-                        {
-                            _draggable.OnBeginDrag(worldPos);
-                        }
+                        Physics2D.OverlapPoint(_worldPos, _filter, _overlap);
+                        if (_overlap.Length != 0 && _overlap[0].TryGetComponent(out _draggable)) 
+                            _draggable.OnBeginDrag(_worldPos);
                         break;
                     }
                     case TouchPhase.Moved:
                     {
                         if (_draggable != null)
                         {
-                            _draggable.OnDrag(worldPos);
-                            switch (worldPos.x)
+                            _draggable.OnDrag(_worldPos);
+                            switch (_worldPos.x)
                             {
                                 case <= 0 when _changeSideService.CurrentSide != EPlayerSide.Right:
                                     _changeSideService.SetSide(EPlayerSide.Right);
@@ -67,9 +90,10 @@ namespace Gameplay.Drag
                     {
                         if (_draggable != null)
                         {
-                            _draggable.OnDragEnd(worldPos);
+                            _draggable.OnDragEnd(_worldPos);
                             _draggable = null;
                         }
+                        _startedOverUITouch = false;
                         break;
                     }
                 }
@@ -77,27 +101,30 @@ namespace Gameplay.Drag
                 return;
             }
             
-            if(Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject())
-                return;
+            if (Input.GetMouseButtonDown(0))
+                _startedOverUIMouse = IsPointerOverUI(Input.mousePosition);
 
-            screenPos = Input.mousePosition;
-            worldPos = _cam.ScreenToWorldPoint(screenPos);
+            if (_startedOverUIMouse)
+            {
+                if (Input.GetMouseButtonUp(0)) _startedOverUIMouse = false;
+                return;
+            }
+
+            _worldPos = _cam.ScreenToWorldPoint(Input.mousePosition);
             
             if (Input.GetMouseButtonDown(0))
-            {
-                var hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity, dragMask);
-                if (hit.collider && hit.collider.TryGetComponent(out _draggable))
-                {
-                    _draggable.OnBeginDrag(worldPos);
-                }
+            { 
+                int count = Physics2D.OverlapPoint(_worldPos, _filter, _overlap);
+                if (count > 0 && _overlap.Length != 0 && _overlap[0].TryGetComponent(out _draggable)) 
+                    _draggable.OnBeginDrag(_worldPos);
             }
 
             if (Input.GetMouseButton(0))
             {
                 if (_draggable != null)
                 {
-                    _draggable.OnDrag(worldPos);
-                    switch (worldPos.x)
+                    _draggable.OnDrag(_worldPos);
+                    switch (_worldPos.x)
                     {
                         case <= 0 when _changeSideService.CurrentSide != EPlayerSide.Right:
                             _changeSideService.SetSide(EPlayerSide.Right);
@@ -108,15 +135,11 @@ namespace Gameplay.Drag
                     }
                 }
             }
+
+            if (!Input.GetMouseButtonUp(0) || _draggable == null) return;
             
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (_draggable != null)
-                {
-                    _draggable.OnDragEnd(worldPos);
-                    _draggable = null;
-                }
-            }
+            _draggable.OnDragEnd(_worldPos);
+            _draggable = null;
 
         }
     }

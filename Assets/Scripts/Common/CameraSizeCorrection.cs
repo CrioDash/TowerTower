@@ -1,4 +1,5 @@
-﻿using Extensions;
+﻿using System;
+using Extensions;
 using Gameplay.Tower;
 using UnityEngine;
 using Zenject;
@@ -22,7 +23,10 @@ namespace Common
             var ratio = defaultAspect / cam.aspect;
             cinemachineCamera.Lens.OrthographicSize = defaultSize * ratio;
             
-            Application.targetFrameRate = int.MaxValue;
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+            QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
+            
         }
         
     }

@@ -11,6 +11,8 @@ namespace Gameplay.Enemy.Impls.Behaviours
         private float _speed;
         private int _side;
 
+        private float _seed;
+
         public int side => _side;
 
         public SineWaveBehavior(float amplitude, float frequency, float speed)
@@ -25,12 +27,14 @@ namespace Gameplay.Enemy.Impls.Behaviours
             _rb = enemy.GetComponent<Rigidbody2D>();
             _startPos = _rb.position;
             _side = enemy.transform.position.x > 0 ? -1 : 1;
+
+            _seed = Random.Range(0.25f, 1f);
         }
         
         public void Tick(float dt)
         {
             var pos = _rb.position;
-            float t = Time.time * _frequency;
+            float t = Time.time * _frequency * _seed;
             pos.y = _startPos.y + Mathf.Sin(t) * _amplitude;
             pos.x += _speed * _side * dt;
             _rb.MovePosition(pos);

@@ -8,6 +8,9 @@ namespace Gameplay.Aim.Impls
         private readonly LineRenderer _lineRenderer;
         private readonly Transform _trajectoryTransform;
         private readonly IPlayerAimDatabase _playerAimDatabase;
+        
+        private Vector3 _displacement;
+        private float _timeStep;
 
         public TrajectoryVisualizer(
             Transform trajectoryTransform,
@@ -28,15 +31,14 @@ namespace Gameplay.Aim.Impls
         {
             _trajectoryTransform.eulerAngles = Vector3.zero;
             _lineRenderer.positionCount = _playerAimDatabase.TrajectorySegmentsCount;
-        
+            
             for (int i = 0; i < _playerAimDatabase.TrajectorySegmentsCount; i++)
             {
-                float t = i * _playerAimDatabase.TrajectoryTimeStep;
+               _timeStep = i * _playerAimDatabase.TrajectoryTimeStep;
                 
-                Vector3 displacement = velocity * t + Physics2D.gravity * (0.5f * t * t);
-                Vector3 drawPoint = displacement;
-            
-                _lineRenderer.SetPosition(i, drawPoint);
+                _displacement = velocity * _timeStep + Physics2D.gravity * (0.5f * _timeStep * _timeStep);
+                
+                _lineRenderer.SetPosition(i, _displacement);
             }
         }
     }

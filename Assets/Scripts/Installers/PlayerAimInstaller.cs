@@ -9,7 +9,6 @@ namespace Installers
     public class PlayerAimInstaller: MonoInstaller
     {
         [SerializeField] private Transform arrowTransform;
-        [SerializeField] private SplineContainer splineContainer;
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform bowTransform;
         [SerializeField] private Transform trajectoryTransform;
@@ -23,7 +22,7 @@ namespace Installers
             Container.Bind<IAimVisualizer>()
                 .To<SplineAimVisualizer>()
                 .AsSingle()
-                .WithArguments(splineContainer, lineRenderer, bowTransform);
+                .WithArguments(lineRenderer, bowTransform);
 
             Container.Bind<IArrowManipulator>()
                 .To<ArrowManipulator>()

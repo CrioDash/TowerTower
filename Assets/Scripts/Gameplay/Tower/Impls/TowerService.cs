@@ -64,8 +64,6 @@ namespace Gameplay.Tower.Impls
             go.transform.position = pos;
             go.transform.localScale = _towerSettingsDatabase.BlockSize;
             go.SetActive(true);
-
-            go.GetComponent<SpriteRenderer>().sprite = _towerSettingsDatabase.TowerSprites[_currentBlocks.Count];
             
             ITowerBlock block = go.GetComponent<ITowerBlock>();
             

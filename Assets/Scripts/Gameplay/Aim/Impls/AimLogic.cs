@@ -10,6 +10,10 @@ namespace Gameplay.Aim.Impls
         private readonly IPlayerAimDatabase _playerAimDatabase;
         private readonly IPlayerChangeSideService _sideService;
 
+        private float _magnitude;
+        private Vector2 _direction = Vector2.zero;
+        private float _angle;
+        
         public AimLogic(
             IPlayerAimDatabase playerAimDatabase,
             IPlayerChangeSideService sideService)
@@ -20,16 +24,16 @@ namespace Gameplay.Aim.Impls
 
         public float CalculatePullFactor(Vector2 dragStart, Vector2 current)
         {
-            float magnitude = Vector2.Distance(current, dragStart) / 5f;
-            return Mathf.Clamp01(magnitude / _playerAimDatabase.StringMagnitude);
+            _magnitude = Vector2.Distance(current, dragStart) / 5f;
+            return Mathf.Clamp01(_magnitude / _playerAimDatabase.StringMagnitude);
         }
 
         public float CalculateAngle(Vector2 dragStart, Vector2 current, EPlayerSide side)
         {
-            Vector2 direction = side == EPlayerSide.Left ? current - dragStart : dragStart - current;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            _direction = side == EPlayerSide.Left ? current - dragStart : dragStart - current;
+            _angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
-            return side == EPlayerSide.Right ? -angle : angle;
+            return side == EPlayerSide.Right ? - _angle : _angle;
         }
     }
 }

@@ -9,14 +9,9 @@ namespace Gameplay.Player.Impls
         private EPlayerSide _current = EPlayerSide.Left;
         public EPlayerSide CurrentSide => _current;
 
-        private readonly BehaviorSubject<EPlayerSide> _sideStream;
+        private readonly Subject<EPlayerSide> _sideStream = new();
         public IObservable<EPlayerSide> OnSideChanged => _sideStream.AsObservable();
 
-        public PlayerChangeSideService()
-        {
-            _sideStream = new BehaviorSubject<EPlayerSide>(_current);
-        }
-        
         public void ToggleSide()
         {
             _current = _current == EPlayerSide.Left ? EPlayerSide.Right : EPlayerSide.Left;
@@ -30,12 +25,6 @@ namespace Gameplay.Player.Impls
                 _current = side;
                 _sideStream.OnNext(_current);
             }
-        }
-
-        public void ChangeSide()
-        {
-            _current = _current == EPlayerSide.Left ? EPlayerSide.Right : EPlayerSide.Left;
-            _sideStream.OnNext(_current);
         }
         
     }

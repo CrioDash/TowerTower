@@ -48,12 +48,12 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 7
   spritePivot: {x: 0.5, y: 0}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,14 +98,14 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 128
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 48
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tower_0
+      name: towerBlock_0
       rect:
         serializedVersion: 2
         x: 0
@@ -126,16 +126,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e8879f25b9e3f7750800000000000000
-      internalID: 6304826840174917774
+      spriteID: 014796df1d2b94044b03014cd97640fe
+      internalID: 1300337912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tower_1
+      name: towerBlock_1
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bd39dbc242ec494e86234538d46ffda
-      internalID: 1946206889
+      spriteID: ecd517fb3252af741b5e5900a8fca8b4
+      internalID: -809675158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tower_2
+      name: towerBlock_2
       rect:
         serializedVersion: 2
         x: 0
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fe5ccc2672567b41a36fb204d55f5e9
-      internalID: 1393780040
+      spriteID: a63e71f9893f269409b8f1c9f76bd29c
+      internalID: -128494907
       vertices: []
       indices: 
       edges: []
@@ -188,15 +188,17 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: e1e90363812368a4280834ab6eb2dad4, type: 3}
+      name: _NormalMap
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":3.0},"gridSpriteSize":{"x":81.0,"y":27.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      tower_0: 6304826840174917774
-      tower_1: 1946206889
-      tower_2: 1393780040
+      towerBlock_0: 1300337912
+      towerBlock_1: -809675158
+      towerBlock_2: -128494907
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

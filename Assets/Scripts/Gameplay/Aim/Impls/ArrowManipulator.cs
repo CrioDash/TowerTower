@@ -9,6 +9,8 @@ namespace Gameplay.Aim.Impls
         private readonly IPlayerAimDatabase _playerAimDatabase;
 
         public Vector3 ArrowPos => _arrowTransform.position;
+
+        private Vector3 _pos;
         
         public ArrowManipulator(
             Transform arrowTransform,
@@ -20,16 +22,16 @@ namespace Gameplay.Aim.Impls
 
         public void UpdateArrow(float pullFactor)
         {
-            Vector3 pos = _arrowTransform.localPosition;
-            pos.x = pullFactor * _playerAimDatabase.StringMagnitude;
-            _arrowTransform.localPosition = pos;
+            _pos = _arrowTransform.localPosition;
+            _pos.x = pullFactor * _playerAimDatabase.StringMagnitude;
+            _arrowTransform.localPosition = _pos;
         }
 
         public void ResetArrow()
         {
-            Vector3 pos = _arrowTransform.localPosition;
-            pos.x = 0;
-            _arrowTransform.localPosition = pos;
+            _pos = _arrowTransform.localPosition;
+            _pos.x = 0;
+            _arrowTransform.localPosition = _pos;
         }
     }
 }

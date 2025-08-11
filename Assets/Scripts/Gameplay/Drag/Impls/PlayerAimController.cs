@@ -56,7 +56,7 @@ namespace Gameplay.Drag.Impls
 
         private void Start()
         {
-            _visualizer.ResetSpline();
+            _visualizer.ResetLineRenderer();
         }
 
         public void OnBeginDrag(Vector2 worldPointer)
@@ -73,7 +73,7 @@ namespace Gameplay.Drag.Impls
             
             _trajectoryVisualizer.DrawTrajectory(-spriteContainer.right * (_playerAimDatabase.ArrowMaxForce * _currentPull));
             _animator.SetFloat(_playerAimDatabase.AnimatorBowMagnitude, _currentPull);
-            _visualizer.UpdateSpline(_currentPull);
+            _visualizer.UpdateLineRenderer(_currentPull);
             _arrowManipulator.UpdateArrow(_currentPull);
 
             spriteContainer.localRotation = Quaternion.Euler(0, _sideService.CurrentSide == EPlayerSide.Right ? 180f : 0, _currentAngle);
@@ -82,7 +82,7 @@ namespace Gameplay.Drag.Impls
         public void OnDragEnd(Vector2 worldPointer)
         {
             _animator.SetFloat(_playerAimDatabase.AnimatorBowMagnitude, 0);
-            _visualizer.ResetSpline();
+            _visualizer.ResetLineRenderer();
             _arrowManipulator.ResetArrow();
             _trajectoryVisualizer.DisableTrajectory();
             
